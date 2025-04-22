@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pembukuan Penjualan</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Pembukuan Penjualan</h1>
+
+    <form id="formTransaksi">
+      <input type="text" placeholder="Nama Customer" required />
+      <input type="date" required />
+      <input type="number" placeholder="Uang Masuk" />
+      <input type="number" placeholder="Uang Keluar" />
+      <input type="text" placeholder="Metode Pembayaran" />
+      <input type="number" placeholder="DP" />
+      <input type="number" placeholder="Kekurangan" />
+      <textarea placeholder="Keterangan (opsional)"></textarea>
+      <button type="submit">Tambah Transaksi</button>
+    </form>
+
+    <h2>Riwayat Transaksi</h2>
+    <table id="tabelTransaksi">
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>Tanggal</th>
+          <th>Masuk</th>
+          <th>Keluar</th>
+          <th>Metode</th>
+          <th>DP</th>
+          <th>Kekurangan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data akan ditambahkan lewat JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const form = document.getElementById('formTransaksi');
+    const tabel = document.querySelector('#tabelTransaksi tbody');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const inputs = form.querySelectorAll('input, textarea');
+      const row = document.createElement('tr');
+      inputs.forEach((input, i) => {
+        if (i < 7) {
+          const cell = document.createElement('td');
+          cell.textContent = input.value || '-';
+          row.appendChild(cell);
+        }
+      });
+      tabel.appendChild(row);
+      form.reset();
+    });
+  </script>
+</body>
+</html>
